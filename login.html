@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASO.CORP // B2B ACCESS</title>
+    <!-- Favicon (Красный квадрат) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ff2a00%22/></svg>">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;600;900&display=swap');
+
+        :root {
+            --black: #050505;
+            --red: #ff2a00;
+            --white: #ffffff;
+            --gray: #f3f3f3;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black); /* Темная тема для B2B */
+            color: var(--white);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Inputs */
+        .brutal-input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--white);
+            color: var(--white);
+            font-family: 'JetBrains Mono', monospace;
+            width: 100%;
+            padding: 1rem 0;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            outline: none;
+            transition: border-color 0.3s;
+            border-radius: 0;
+        }
+        .brutal-input:focus {
+            border-color: var(--red);
+        }
+        .brutal-input::placeholder {
+            color: #555;
+        }
+
+        /* Button */
+        .btn-enter {
+            background: var(--red);
+            color: var(--white);
+            width: 100%;
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 2rem;
+        }
+        .btn-enter:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        /* Background Grid */
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Error Message Animation */
+        .error-box {
+            display: none;
+            border: 1px solid var(--red);
+            background: rgba(255, 42, 0, 0.1);
+            color: var(--red);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+    </style>
+</head>
+<body class="selection:bg-red-600 selection:text-white">
+
+    <div class="grid-bg"></div>
+
+    <!-- Top Bar -->
+    <div class="w-full p-8 flex justify-between items-center z-10 border-b border-gray-800">
+        <!-- Ссылка назад на лендинг -->
+        <a href="index.html" class="font-black text-xl tracking-tighter hover:text-[var(--red)] transition-colors">
+            MASO<span class="text-[var(--red)]">.CORP</span>
+        </a>
+        <div class="mono text-xs text-gray-500">SECURE CONNECTION // SSL 256-BIT</div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center relative z-10 px-4">
+        <div class="w-full max-w-md">
+            <div class="mb-8">
+                <h1 class="text-6xl font-black uppercase leading-none mb-2">B2B<br>Portal</h1>
+                <p class="mono text-xs text-gray-400">Pouze pro autorizované partnery.</p>
+            </div>
+
+            <!-- Custom Error Message Area -->
+            <div id="error-message" class="error-box">
+                ⚠ ACCESS DENIED: INVALID CREDENTIALS
+            </div>
+
+            <form id="login-form" action="#" onsubmit="handleLogin(event)">
+                <div class="mb-6">
+                    <label class="mono text-xs text-[var(--red)] block mb-2">ID PARTNERA</label>
+                    <input type="text" class="brutal-input" placeholder="MC-0000-X" required autofocus>
+                </div>
+                
+                <div class="mb-8">
+                    <label class="mono text-xs text-[var(--red)] block mb-2">HESLO</label>
+                    <input type="password" class="brutal-input" placeholder="••••••••" required>
+                </div>
+
+                <div class="flex items-center gap-3 mb-8 cursor-pointer group">
+                    <div class="w-4 h-4 border border-white group-hover:bg-[var(--red)] transition-colors"></div>
+                    <span class="mono text-xs text-gray-400 group-hover:text-white transition-colors">Zapamatovat zařízení</span>
+                </div>
+
+                <button class="btn-enter">
+                    Vstoupit do Systému
+                </button>
+            </form>
+            
+            <div class="mt-8 text-center mono text-[10px] text-gray-600">
+                UNAUTHORIZED ACCESS IS PROHIBITED.<br>IP ADDRESS LOGGED: 192.168.0.1
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Ticker -->
+    <div class="w-full bg-[var(--red)] text-black py-2 overflow-hidden whitespace-nowrap mono text-xs font-bold uppercase z-10">
+        SYSTEM STATUS: ONLINE • STOCK LEVELS: UPDATED 10:42 AM • NEXT DELIVERY: TOMORROW 06:00 • SYSTEM STATUS: ONLINE • STOCK LEVELS: UPDATED 10:42 AM
+    </div>
+
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            const errorBox = document.getElementById('error-message');
+            
+            // Сброс анимации (чтобы можно было проиграть её снова)
+            errorBox.style.display = 'none';
+            void errorBox.offsetWidth; // trigger reflow
+            
+            // Показ ошибки
+            errorBox.style.display = 'block';
+            
+            // Очистка поля пароля для реализма
+            e.target.querySelectorAll('input')[1].value = '';
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="cs" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASO.CORP // OFFICIAL SUPPLY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;600;900&display=swap');
+
+        :root {
+            --black: #050505;
+            --red: #ff2a00;
+            --white: #ffffff;
+            --gray: #f3f3f3;
+            --gray-dark: #1a1a1a;
+        }
+
+        body.dark-theme {
+            --black: #ffffff;
+            --white: #050505;
+            --gray: #1a1a1a;
+            --gray-dark: #f3f3f3;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white);
+            color: var(--black);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Smooth Scroll is handled by Tailwind 'scroll-smooth' on html tag */
+
+        .border-b-black { border-bottom: 1px solid var(--black); }
+        .border-t-black { border-top: 1px solid var(--black); }
+        .border-r-black { border-right: 1px solid var(--black); }
+        .border-l-black { border-left: 1px solid var(--black); }
+        
+        .btn-primary {
+            background: var(--black);
+            color: var(--white);
+            padding: 1rem 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: inline-block;
+            transition: all 0.2s;
+            border: 1px solid var(--black);
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: var(--red);
+            border-color: var(--red);
+            color: #fff !important;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--black);
+            padding: 1rem 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: 1px solid var(--black);
+            transition: all 0.2s;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn-outline:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .img-fit {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: 50% 50%;
+            display: block;
+            filter: grayscale(100%) contrast(110%);
+            transition: filter 0.3s;
+        }
+        
+        .img-fit:hover {
+            filter: grayscale(0%) contrast(100%);
+        }
+
+        .ticker-bar {
+            white-space: nowrap;
+            overflow: hidden;
+            padding: 0.5rem 0;
+            background: var(--gray);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--black);
+            color: var(--black);
+        }
+
+        nav {
+            background-color: var(--white) !important;
+            border-bottom: 1px solid var(--black);
+            color: var(--black);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .bg-custom-white { background-color: var(--white); }
+        .bg-custom-black { background-color: var(--black); }
+        .text-custom-white { color: var(--white); }
+        .text-custom-black { color: var(--black); }
+        
+        .theme-toggle {
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .theme-toggle:hover { color: var(--red); }
+
+        .brutal-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        .brutal-table th {
+            text-align: left;
+            border-bottom: 2px solid var(--black);
+            padding: 1rem;
+            background: var(--gray);
+            color: var(--black);
+        }
+        .brutal-table td {
+            border-bottom: 1px solid var(--black);
+            padding: 1rem;
+        }
+        .brutal-table tr:last-child td { border-bottom: none; }
+
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            border-bottom: 1px solid var(--black);
+            border-right: 1px solid var(--black);
+            overflow: hidden;
+        }
+        @media (min-width: 768px) {
+            .gallery-item:nth-child(4n) { border-right: none; }
+        }
+        
+        .gallery-label {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 10px;
+            background: var(--white); color: var(--black);
+            font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+            text-transform: uppercase; border-top: 1px solid var(--black);
+            z-index: 10; transition: background 0.3s, color 0.3s;
+        }
+        .gallery-item:hover .gallery-label {
+            background: var(--black); color: var(--white);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 md:px-8 h-16">
+        <div class="flex items-center gap-6">
+            <div class="font-black text-xl tracking-tighter">MASO<span class="text-[var(--red)]">.CORP</span></div>
+            <button onclick="toggleTheme()" class="theme-toggle hidden md:flex border border-[var(--black)] px-2 py-1 ml-4">
+                <div class="w-3 h-3 bg-[var(--black)]"></div> [INVERT]
+            </button>
+        </div>
+
+        <div class="hidden md:flex gap-8 mono text-xs font-bold uppercase">
+            <a href="#katalog" class="hover:text-[var(--red)]">Katalog</a>
+            <a href="#filosofie" class="hover:text-[var(--red)]">Filosofie</a>
+            <a href="#kontakt" class="hover:text-[var(--red)]">Kontakt</a>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <button onclick="toggleTheme()" class="md:hidden w-6 h-6 bg-[var(--black)] border border-[var(--black)]"></button>
+            <a href="login.html" class="mono text-xs font-bold uppercase border border-[var(--black)] px-4 py-2 hover:bg-[var(--black)] hover:text-[var(--white)] transition-colors">
+                B2B Login
+            </a>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-20 px-4 md:px-8 max-w-[1600px] mx-auto border-b-black">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div class="md:col-span-8">
+                <h1 class="text-[12vw] md:text-[8vw] leading-[0.85] font-black uppercase mb-8">
+                    Maso je<br><span class="text-[var(--red)]">Měna.</span>
+                </h1>
+                <p class="text-xl md:text-2xl font-bold max-w-2xl leading-tight">
+                    Průmyslový dodavatel prémiového hovězího pro gastronomickou elitu. 
+                    Bez kompromisů. Bez zbytečných slov.
+                </p>
+            </div>
+            <div class="md:col-span-4 flex flex-col justify-end items-start md:items-end">
+                <div class="mono text-xs mb-4 text-right">
+                    EST. 2024<br>PRAGUE, CZ<br>ISO 9001
+                </div>
+                <!-- Кнопка ведет вниз к контактам -->
+                <a href="#kontakt" class="btn-primary">Objednat Katalog</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="ticker-bar px-4">
+        PREMIUM SUPPLY • DRY AGED • WAGYU A5 • RIBEYE • T-BONE • LOGISTICS • COLD STORAGE • PREMIUM SUPPLY • DRY AGED • WAGYU A5
+    </div>
+
+    <main id="katalog" class="border-b-black">
+        <!-- Row 1: Rib-Eye -->
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            <div class="p-8 md:p-16 border-b-black md:border-b-0 md:border-r-black flex flex-col justify-center bg-custom-white">
+                <span class="mono text-xs text-gray-400 mb-4">01 // PRODUKT</span>
+                <h2 class="text-5xl font-black uppercase mb-6">Rib-Eye<br>Steak</h2>
+                <p class="mono text-sm leading-relaxed mb-8 max-w-md">
+                    Vysoký roštěnec. Intramuskulární tuk zajišťuje maximální šťavnatost. Vakuově baleno.
+                </p>
+                <ul class="mono text-xs space-y-2 border-l-2 border-[var(--red)] pl-4">
+                    <li>Původ: CZ/US</li>
+                    <li>Zrání: 30 dní (Wet)</li>
+                </ul>
+            </div>
+            <div class="relative h-[500px] md:h-auto border-b-black md:border-b-0 overflow-hidden">
+                <img src="assets/img/ribeye_macro.jpeg" class="img-fit" alt="Ribeye Detail">
+            </div>
+        </div>
+
+        <!-- Row 2: Dry Aged -->
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            <div class="relative h-[500px] md:h-auto border-b-black md:border-b-0 md:border-r-black order-2 md:order-1 overflow-hidden">
+                <img src="assets/img/mear_hooks.jpeg" class="img-fit" alt="Industrial Hooks">
+            </div>
+            <div class="p-8 md:p-16 border-b-black md:border-b-0 flex flex-col justify-center bg-custom-white order-1 md:order-2">
+                <span class="mono text-xs text-gray-400 mb-4">02 // PROCES</span>
+                <h2 class="text-5xl font-black uppercase mb-6">Dry<br>Aged</h2>
+                <p class="mono text-sm leading-relaxed mb-8 max-w-md">
+                    Proces suchého zrání v kontrolované atmosféře. Enzymatický rozklad vláken.
+                </p>
+                <a href="assets/files/tech_specs.pdf" target="_blank" class="btn-outline w-max">Technická Specifikace (PDF)</a>
+            </div>
+        </div>
+
+        <!-- Row 3: Wagyu -->
+        <div class="grid grid-cols-1 md:grid-cols-2 bg-[var(--black)] text-[var(--white)]">
+             <div class="p-8 md:p-16 border-b border-[var(--white)] md:border-b-0 md:border-r md:border-[var(--white)] flex flex-col justify-center">
+                <span class="mono text-xs text-gray-400 mb-4">03 // EXCLUSIVE</span>
+                <h2 class="text-5xl font-black uppercase mb-6">Wagyu<br>Grade A5</h2>
+                <p class="mono text-sm leading-relaxed mb-8 max-w-md opacity-80">
+                    Japonská genetika. Extrémní mramorování. Limitovaná dostupnost.
+                </p>
+                <div class="mono text-xs border border-[var(--white)] px-4 py-2 w-max uppercase hover:bg-[var(--white)] hover:text-[var(--black)] transition-colors cursor-pointer">
+                    Reserve Now
+                </div>
+            </div>
+            <div class="relative h-[500px] md:h-auto border-b border-[var(--white)] md:border-b-0 overflow-hidden">
+                <img src="assets/img/wagyu_a5.jpeg" class="img-fit" alt="Wagyu Marbling">
+            </div>
+        </div>
+
+        <!-- Row 4: Logistics -->
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            <div class="relative h-[500px] md:h-auto border-b-black md:border-b-0 md:border-r-black order-2 md:order-1 overflow-hidden">
+                <img src="assets/img/logistics_map.jpeg" class="img-fit" alt="Map Vector">
+            </div>
+            <div class="p-8 md:p-16 border-b-black md:border-b-0 flex flex-col justify-center bg-custom-white order-1 md:order-2">
+                <span class="mono text-xs text-gray-400 mb-4">04 // LOGISTIKA</span>
+                <h2 class="text-5xl font-black uppercase mb-6">Cold<br>Chain</h2>
+                <p class="mono text-sm leading-relaxed mb-8 max-w-md">
+                    Nepřetržitý chladící řetězec 0-2°C. GPS monitoring.
+                </p>
+            </div>
+        </div>
+
+         <!-- Row 5: Anatomy -->
+         <div class="grid grid-cols-1 md:grid-cols-2">
+            <div class="p-8 md:p-16 border-b-black md:border-b-0 md:border-r-black flex flex-col justify-center bg-custom-white">
+                <span class="mono text-xs text-gray-400 mb-4">05 // ANATOMIE</span>
+                <h2 class="text-5xl font-black uppercase mb-6">Master<br>Cuts</h2>
+                <p class="mono text-sm leading-relaxed mb-8 max-w-md">
+                    Přesné bourání. Minimální odřez, maximální výtěžnost.
+                </p>
+                <a href="assets/files/cuts_scheme.pdf" target="_blank" class="btn-outline w-max">Stáhnout schéma (PDF)</a>
+            </div>
+            <div class="relative h-[500px] md:h-auto border-b-black md:border-b-0 overflow-hidden">
+                <img src="assets/img/cow_anatomy.jpeg" class="img-fit" alt="Anatomy Diagram">
+            </div>
+        </div>
+        
+        <!-- Gallery -->
+        <div class="w-full bg-custom-white border-b-black">
+            <div class="ticker-bar border-t-black border-b-black px-4">
+                DALŠÍ SORTIMENT • BURGER • BONES • ORGANS • TARTARE • RAW MATERIALS
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4">
+                <div class="gallery-item">
+                    <img src="assets/img/burger_patty.jpeg" class="img-fit" alt="Burger">
+                    <div class="gallery-label flex justify-between"><span>Burger</span><span>180g</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/img/bone_marrow.jpeg" class="img-fit" alt="Bones">
+                    <div class="gallery-label flex justify-between"><span>Morkové Kosti</span><span>Cut</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/img/beef_heart.jpeg" class="img-fit" alt="Heart">
+                    <div class="gallery-label flex justify-between"><span>Srdce</span><span>Whole</span></div>
+                </div>
+                <div class="gallery-item border-r-0">
+                    <img src="assets/img/tartare_raw.jpeg" class="img-fit" alt="Tartare">
+                    <div class="gallery-label flex justify-between"><span>Tatarák</span><span>Premium</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing -->
+        <div class="w-full border-b-black bg-custom-white p-8 md:p-16">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-black uppercase mb-8 text-center">Aktuální Ceník (Q3 2024)</h2>
+                <div class="overflow-x-auto">
+                    <table class="brutal-table">
+                        <thead>
+                            <tr><th>Kód</th><th>Produkt</th><th>Původ</th><th>Cena / kg</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="mono">A-001</td><td>Rib-Eye</td><td>CZ (Bio)</td><td class="text-right">890 CZK</td></tr>
+                            <tr><td class="mono">A-002</td><td>Striploin</td><td>UY (Grain Fed)</td><td class="text-right">950 CZK</td></tr>
+                            <tr><td class="mono">B-015</td><td>Tenderloin</td><td>AR (Angus)</td><td class="text-right">1 250 CZK</td></tr>
+                            <tr><td class="mono">C-008</td><td>Flank Steak</td><td>US (USDA)</td><td class="text-right">680 CZK</td></tr>
+                             <tr><td class="mono">S-099</td><td class="text-[var(--red)] font-bold">Wagyu A5</td><td>JP</td><td class="text-right">8 500 CZK</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Bottom -->
+        <div class="w-full h-[60vh] border-b-black relative overflow-hidden">
+            <img src="assets/img/wide_shot.jpeg" class="img-fit" alt="Atmosphere">
+            <div class="absolute bottom-8 left-8 text-white mono text-xs z-10">CAM. 04 / STORAGE UNIT B</div>
+        </div>
+    </main>
+
+    <section id="filosofie" class="py-24 px-4 md:px-8 max-w-[1200px] mx-auto text-center">
+        <h2 class="text-4xl md:text-6xl font-black uppercase mb-8">"Kvalita není čin, je to zvyk."</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mt-16">
+            <div class="border-t border-black pt-4"><h3 class="text-xl font-bold mb-2">LOGISTIKA</h3><p class="mono text-xs text-gray-600">Doručení do 6 hodin.</p></div>
+            <div class="border-t border-black pt-4"><h3 class="text-xl font-bold mb-2">PŮVOD</h3><p class="mono text-xs text-gray-600">Certifikované farmy.</p></div>
+            <div class="border-t border-black pt-4"><h3 class="text-xl font-bold mb-2">PODPORA</h3><p class="mono text-xs text-gray-600">24/7 linka.</p></div>
+        </div>
+    </section>
+
+    <footer id="kontakt" class="bg-custom-black text-custom-white pt-20 pb-8 px-4 md:px-8 transition-colors duration-300">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-20 max-w-[1600px] mx-auto">
+            <div>
+                <h2 class="text-6xl md:text-8xl font-black uppercase leading-none mb-8 text-[var(--red)]">Spolu<br>práce?</h2>
+                <a href="mailto:order@maso.corp" class="text-2xl md:text-3xl font-bold underline hover:text-gray-400 decoration-1 underline-offset-8">order@maso.corp</a>
+            </div>
+            <div class="flex flex-col justify-end md:items-end mono text-sm space-y-4">
+                <p>MASO.CORP HQ<br>Dělnická 42<br>170 00 Praha 7</p>
+                <p>+420 600 000 000</p>
+                <!-- Ссылка на арт-гайд (спрятана для профи) -->
+                <a href="guide.html" class="opacity-30 hover:opacity-100 transition-opacity mt-4 text-[10px]">Technical Guide →</a>
+            </div>
+        </div>
+        <div class="border-t border-[var(--gray-dark)] pt-8 flex flex-col md:flex-row justify-between mono text-xs text-gray-500">
+            <div>© 2026 MASO.CORP. All rights reserved.</div>
+            <div class="mt-4 md:mt-0">DESIGN: STATIC SYSTEM</div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+        }
+    </script>
+</body>
+</html>

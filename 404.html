@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASO.CORP // 404 ERROR</title>
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ff2a00%22/></svg>">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@900&display=swap');
+
+        body {
+            background-color: #f3f3f3;
+            color: #050505;
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .glitch-wrapper {
+            position: relative;
+        }
+
+        /* Glitch Text Effect */
+        .big-text {
+            font-size: 20vw;
+            line-height: 0.8;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            color: #050505;
+            position: relative;
+            z-index: 10;
+        }
+
+        .big-text::before,
+        .big-text::after {
+            content: "404\A NULL";
+            white-space: pre;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .big-text::before {
+            color: #ff2a00;
+            z-index: -1;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            transform: translate(-4px, -2px);
+            opacity: 0.5;
+            animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+        }
+
+        .big-text::after {
+            color: #000;
+            z-index: -2;
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+            transform: translate(4px, 2px);
+            opacity: 0.5;
+            animation: glitch-anim-2 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(20% 0 80% 0); }
+            20% { clip-path: inset(60% 0 10% 0); }
+            40% { clip-path: inset(40% 0 50% 0); }
+            60% { clip-path: inset(80% 0 5% 0); }
+            80% { clip-path: inset(10% 0 70% 0); }
+            100% { clip-path: inset(30% 0 20% 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(10% 0 60% 0); }
+            20% { clip-path: inset(30% 0 20% 0); }
+            40% { clip-path: inset(70% 0 10% 0); }
+            60% { clip-path: inset(20% 0 50% 0); }
+            80% { clip-path: inset(50% 0 30% 0); }
+            100% { clip-path: inset(0% 0 90% 0); }
+        }
+
+        /* Overlay Badge */
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-5deg);
+            background: #ff2a00;
+            color: white;
+            font-size: 2rem;
+            padding: 0.5rem 2rem;
+            white-space: nowrap;
+            font-family: 'JetBrains Mono', monospace;
+            z-index: 20;
+            font-weight: bold;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        /* Button */
+        .btn-home {
+            margin-top: 3rem;
+            border: 2px solid #050505;
+            padding: 1rem 3rem;
+            text-transform: uppercase;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            background: transparent;
+            cursor: pointer;
+            text-decoration: none;
+            color: #050505;
+            z-index: 20;
+        }
+        .btn-home:hover {
+            background: #050505;
+            color: white;
+        }
+
+        /* Barcode CSS */
+        .barcode {
+            margin-top: 2rem;
+            height: 40px;
+            width: 200px;
+            background-image: repeating-linear-gradient(90deg, 
+                #000 0px, #000 2px, 
+                transparent 2px, transparent 4px, 
+                #000 4px, #000 8px, 
+                transparent 8px, transparent 9px);
+        }
+
+        /* Scanline effect */
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 5;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            bottom: 100%;
+            animation: scanline 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100%; }
+        }
+        
+        /* Noise overlay */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scanline"></div>
+    <div class="noise"></div>
+
+    <div class="glitch-wrapper text-center">
+        <div class="big-text">
+            404<br>NULL
+        </div>
+        <div class="overlay-text">
+            OUT OF STOCK
+        </div>
+    </div>
+
+    <div class="mono text-xs mt-8 uppercase tracking-widest text-gray-500 z-10">
+        Error: Resource not found on server
+    </div>
+
+    <div class="barcode"></div>
+
+    <a href="index.html" class="btn-home">
+        Zpět na Hlavní
+    </a>
+
+    <div class="fixed bottom-4 left-4 mono text-[10px] text-gray-400">
+        MASO.CORP SYSTEM v2.0 // ERROR LOG #404
+    </div>
+
+</body>
+</html>

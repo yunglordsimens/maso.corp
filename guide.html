@@ -79,7 +79,25 @@
         .btn-reset.active {
             background: var(--red);
             border-color: var(--red);
-            color: var(--white); /* White text on active red button looks better */
+            color: var(--white);
+        }
+
+        /* Download Button Style */
+        .btn-download {
+            border: 1px dashed var(--black);
+            padding: 8px 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .btn-download:hover {
+            background: var(--black);
+            color: var(--white);
+            border-style: solid;
         }
 
         /* Minimal Cards */
@@ -124,7 +142,6 @@
             background-color: var(--white);
             border-color: var(--border-color);
         }
-        /* В темной теме бордеры карточек должны быть видны */
         body.dark-theme .card-container {
             border-color: #333;
         }
@@ -153,7 +170,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            border: 1px solid var(--white); /* White border inside black bar */
+            border: 1px solid var(--white);
             padding: 2px 8px;
             margin-left: 16px;
         }
@@ -162,7 +179,7 @@
             color: var(--black);
         }
         body.dark-theme .theme-toggle {
-            border-color: var(--black); /* Black border inside white bar (inverted) */
+            border-color: var(--black);
         }
         
     </style>
@@ -172,15 +189,27 @@
     <!-- STATIC STATUS BAR -->
     <div class="status-bar px-4 flex justify-between items-center">
         <div class="flex items-center">
-            <a href="index.html" class="hover:text-[var(--red)] transition-colors mr-4">← BACK</a>
+            <!-- Ссылка на основной сайт -->
+            <a href="Maso_Corp_Landing.html" class="hover:text-[var(--red)] transition-colors mr-4 border-r border-[var(--white)] pr-4">← MASO.CORP SITE</a>
+            
             <span>MASO.CORP™ SYSTEM v2.0</span>
+            
+            <!-- Инверсия цветов -->
             <button onclick="toggleTheme()" class="theme-toggle">
                 <div class="w-3 h-3 bg-[var(--white)] border border-[var(--black)]"></div> 
                 [INVERT]
             </button>
         </div>
-        <div class="hidden md:block">STATUS: PRODUCTION READY</div>
-        <div>OFFSET PRINTING ONLY</div>
+        
+        <div class="flex items-center gap-6">
+            <div class="hidden md:block">STATUS: PRODUCTION READY</div>
+            
+            <!-- Ссылки на скачивание (заглушки) -->
+            <div class="flex gap-2">
+                <a href="#" class="hover:underline hover:text-[var(--red)] text-[10px]">↓ CATALOG.PDF</a>
+                <a href="#" class="hover:underline hover:text-[var(--red)] text-[10px]">↓ CUTS_SCHEME.DXF</a>
+            </div>
+        </div>
     </div>
 
     <!-- HERO -->
@@ -199,6 +228,10 @@
                     B1 FORMAT / 16 PAGES<br>
                     2 COLOR OFFSET
                 </p>
+                <!-- ССЫЛКА НА ПОРТФОЛИО (Потом вставишь сюда реальный URL) -->
+                <a href="#" class="mt-4 inline-block btn-download">
+                    > VIEW FULL CASE STUDY
+                </a>
             </div>
         </div>
     </header>
@@ -254,7 +287,7 @@
             </div>
         </section>
 
-        <!-- SECTION 2: FLATPLAN (NOW WITH VISUALS) -->
+        <!-- SECTION 2: FLATPLAN -->
         <section>
             <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-theme pb-4 gap-6">
                 <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
@@ -297,9 +330,12 @@
     <footer class="bg-[var(--black)] text-[var(--white)] py-16 text-center transition-colors duration-300">
         <div class="max-w-[1400px] mx-auto px-4">
             <p class="mono text-xs text-gray-500 mb-6 uppercase">Document Status: Final</p>
-            <button class="text-3xl md:text-5xl font-black uppercase hover:text-[var(--red)] transition-colors">
-                Download PDF Spec
-            </button>
+            <div class="flex justify-center gap-4 my-6">
+                <!-- Еще раз дублируем кнопки скачивания для удобства -->
+                <a href="#" class="btn-download bg-[var(--white)] text-[var(--black)] hover:bg-[var(--gray)]">
+                    ↓ DOWNLOAD PDF
+                </a>
+            </div>
             <div class="mt-12 pt-8 border-t border-gray-800 mono text-[10px] flex justify-between text-gray-500">
                 <span>MASO.CORP © 2025</span>
                 <span>PRAGUE / CZECHIA</span>
@@ -316,7 +352,7 @@
 
         const pages = [
             { id: 1, section: "Brand", title: "MASO", subtitle: "Cover", desc: "Minimalist layout. Big Logo.", tech: "PANTONE", layout: "cover" },
-            { id: 2, section: "Brand", title: "INTRO", subtitle: "Manifesto", desc: "Large typography only.", tech: "TYPE", layout: "typo" },
+            { id: 2, section: "Brand", title: "INTRO", subtitle: "Manifesto", desc: "Big typography.", tech: "TYPE", layout: "typo" },
             { id: 3, section: "Product", title: "INDEX", subtitle: "List", desc: "Table of contents.", tech: "DATA", layout: "list" },
             { id: 4, section: "Product", title: "RIB-EYE", subtitle: "Steak", desc: "Full bleed Duotone Photo.", tech: "IMG", layout: "image-full" },
             { id: 5, section: "Product", title: "T-BONE", subtitle: "Bone", desc: "Macro detail + Text.", tech: "IMG", layout: "image-text" },
@@ -327,7 +363,7 @@
             { id: 10, section: "Data", title: "ROI", subtitle: "Chart", desc: "Bar chart comparison.", tech: "DATA", layout: "chart" },
             { id: 11, section: "Brand", title: "ISO", subtitle: "Cert", desc: "Repeating pattern.", tech: "PAT", layout: "pattern" },
             { id: 12, section: "Product", title: "AGED", subtitle: "Time", desc: "Timeline visualization.", tech: "UI", layout: "timeline" },
-            { id: 13, section: "Product", title: "WAGYU", subtitle: "Premium", desc: "Inverted (Black page).", tech: "INV", layout: "inverted" },
+            { id: 13, section: "Product", title: "WAGYU", subtitle: "Premium", desc: "Inverted.", tech: "INV", layout: "inverted" },
             { id: 14, section: "Brand", title: "CLIENTS", subtitle: "Grid", desc: "Logo grid.", tech: "GRID", layout: "grid-logos" },
             { id: 15, section: "Contact", title: "FORM", subtitle: "Order", desc: "Dashed lines form.", tech: "UI", layout: "form" },
             { id: 16, section: "Contact", title: "BACK", subtitle: "End", desc: "QR Code + Footer.", tech: "QR", layout: "back" }

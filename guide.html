@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASO.CORP // STATIC SYSTEM</title>
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ff2a00%22/></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -14,6 +16,15 @@
             --red: #ff2a00;
             --white: #fff;
             --gray: #f4f4f5;
+            --border-color: #e5e7eb;
+        }
+
+        /* Темная тема (Инверсия) */
+        body.dark-theme {
+            --black: #ffffff;
+            --white: #050505;
+            --gray: #1a1a1a;
+            --border-color: #333;
         }
 
         body {
@@ -21,13 +32,13 @@
             background-color: var(--white);
             color: var(--black);
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .mono { font-family: 'JetBrains Mono', monospace; }
 
         /* --- STATIC LAYOUT UTILS --- */
         
-        /* Simple static header bar */
         .status-bar {
             background: var(--black);
             color: var(--white);
@@ -37,6 +48,7 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
             border-bottom: 1px solid var(--black);
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         .grid-layout {
@@ -58,6 +70,7 @@
             font-weight: 700;
             transition: all 0.2s ease;
             cursor: pointer;
+            color: var(--black);
         }
         .btn-reset:hover {
             background: var(--black);
@@ -66,15 +79,20 @@
         .btn-reset.active {
             background: var(--red);
             border-color: var(--red);
-            color: var(--white);
+            color: var(--white); /* White text on active red button looks better */
         }
 
         /* Minimal Cards */
         .hover-card {
             transition: background-color 0.2s ease, color 0.2s ease;
+            border-color: var(--black);
         }
         .hover-card:hover {
             background-color: var(--gray);
+        }
+
+        .border-theme {
+            border-color: var(--black);
         }
 
         /* Typography Helper */
@@ -98,23 +116,69 @@
             padding: 0.5rem 0;
             background: var(--gray);
             color: var(--black);
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        /* THUMBNAIL STYLES (Wireframes) */
+        .card-container {
+            background-color: var(--white);
+            border-color: var(--border-color);
+        }
+        /* В темной теме бордеры карточек должны быть видны */
+        body.dark-theme .card-container {
+            border-color: #333;
+        }
+        body.dark-theme .card-container:hover {
+            border-color: var(--white);
+        }
+
+        .thumb-box {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            width: 100%;
+            height: 160px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.2s;
+        }
+        .card-container:hover .thumb-box {
+            border-color: var(--black);
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--white); /* White border inside black bar */
+            padding: 2px 8px;
+            margin-left: 16px;
+        }
+        .theme-toggle:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+        body.dark-theme .theme-toggle {
+            border-color: var(--black); /* Black border inside white bar (inverted) */
         }
         
     </style>
-    <!-- Chosen Palette: Black, White, Red (#ff2a00). No animations. -->
-    <!-- Structure:
-         1. Static Status Bar (instead of marquee).
-         2. Clean Typography (No kinetic stretching).
-         3. Stable Grid Layout.
-         4. Simple Hover States (Color change only).
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
 <body>
 
     <!-- STATIC STATUS BAR -->
     <div class="status-bar px-4 flex justify-between items-center">
-        <div>MASO.CORP™ SYSTEM v2.0</div>
+        <div class="flex items-center">
+            <a href="index.html" class="hover:text-[var(--red)] transition-colors mr-4">← BACK</a>
+            <span>MASO.CORP™ SYSTEM v2.0</span>
+            <button onclick="toggleTheme()" class="theme-toggle">
+                <div class="w-3 h-3 bg-[var(--white)] border border-[var(--black)]"></div> 
+                [INVERT]
+            </button>
+        </div>
         <div class="hidden md:block">STATUS: PRODUCTION READY</div>
         <div>OFFSET PRINTING ONLY</div>
     </div>
@@ -141,12 +205,12 @@
 
     <!-- INFO GRID -->
     <section class="max-w-[1400px] mx-auto px-4 mb-20">
-        <div class="grid grid-cols-1 md:grid-cols-3 border-t border-black">
-            <div class="hover-card p-6 border-b md:border-b-0 md:border-r border-black">
+        <div class="grid grid-cols-1 md:grid-cols-3 border-t border-theme">
+            <div class="hover-card p-6 border-b md:border-b-0 md:border-r border-theme">
                 <span class="mono text-xs text-gray-500 block mb-3">01. CLIENT</span>
                 <h3 class="text-2xl font-bold uppercase leading-none">Premium<br>Supply</h3>
             </div>
-            <div class="hover-card p-6 border-b md:border-b-0 md:border-r border-black">
+            <div class="hover-card p-6 border-b md:border-b-0 md:border-r border-theme">
                 <span class="mono text-xs text-gray-500 block mb-3">02. FORMAT</span>
                 <h3 class="text-2xl font-bold uppercase leading-none">B1 Sheet<br>(16 Pages)</h3>
             </div>
@@ -166,7 +230,7 @@
 
         <!-- SECTION 1: IMPOSITION -->
         <section id="imposition-lab">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-black pb-4">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-theme pb-4">
                 <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
                     IMPOSITION
                 </h2>
@@ -177,10 +241,10 @@
             </div>
 
             <!-- The Visualizer -->
-            <div class="w-full aspect-[1.414/1] border border-black p-4 relative bg-gray-50">
-                <div class="absolute top-0 left-0 bg-black text-white px-2 py-1 mono text-[10px] uppercase">B1 Sheet Preview</div>
+            <div class="w-full aspect-[1.414/1] border border-theme p-4 relative bg-gray-50/10">
+                <div class="absolute top-0 left-0 bg-[var(--black)] text-[var(--white)] px-2 py-1 mono text-[10px] uppercase">B1 Sheet Preview</div>
                 
-                <div id="imposition-grid" class="grid grid-cols-4 grid-rows-2 h-full gap-px bg-gray-200 border border-gray-300 mt-6">
+                <div id="imposition-grid" class="grid grid-cols-4 grid-rows-2 h-full gap-px bg-gray-200 border border-gray-300 mt-6 dark:bg-gray-800 dark:border-gray-700">
                     <!-- JS Injected -->
                 </div>
             </div>
@@ -190,9 +254,9 @@
             </div>
         </section>
 
-        <!-- SECTION 2: FLATPLAN -->
+        <!-- SECTION 2: FLATPLAN (NOW WITH VISUALS) -->
         <section>
-            <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-black pb-4 gap-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-theme pb-4 gap-6">
                 <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
                     FLATPLAN
                 </h2>
@@ -210,18 +274,18 @@
         </section>
 
         <!-- SECTION 3: INK SPECS -->
-        <section class="grid grid-cols-1 md:grid-cols-2 border border-black">
-            <div class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-black hover:bg-gray-50 transition-colors">
-                <div class="w-8 h-8 bg-black rounded-full mb-6"></div>
+        <section class="grid grid-cols-1 md:grid-cols-2 border border-theme">
+            <div class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-theme hover:bg-[var(--gray)] transition-colors">
+                <div class="w-8 h-8 bg-[var(--black)] rounded-full mb-6 border border-gray-500"></div>
                 <h3 class="text-3xl font-bold uppercase mb-4">Black Ink (K)</h3>
-                <p class="mono text-sm max-w-sm leading-relaxed text-gray-600">
+                <p class="mono text-sm max-w-sm leading-relaxed text-gray-500">
                     Standard Process Black. Used for body text, data tables, and structural lines. Ensure 100% K for crisp typography.
                 </p>
             </div>
-            <div class="p-8 md:p-12 hover:bg-gray-50 transition-colors">
+            <div class="p-8 md:p-12 hover:bg-[var(--gray)] transition-colors">
                 <div class="w-8 h-8 bg-[var(--red)] rounded-full mb-6 mix-blend-multiply"></div>
                 <h3 class="text-3xl font-bold uppercase mb-4 text-[var(--red)]">Pantone 805</h3>
-                <p class="mono text-sm max-w-sm leading-relaxed text-gray-600">
+                <p class="mono text-sm max-w-sm leading-relaxed text-gray-500">
                     Neon Red Spot Color. Used for highlights and "organic" shapes. Set blending mode to Multiply when overlapping black.
                 </p>
             </div>
@@ -230,14 +294,14 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-black text-white py-16 text-center">
+    <footer class="bg-[var(--black)] text-[var(--white)] py-16 text-center transition-colors duration-300">
         <div class="max-w-[1400px] mx-auto px-4">
             <p class="mono text-xs text-gray-500 mb-6 uppercase">Document Status: Final</p>
             <button class="text-3xl md:text-5xl font-black uppercase hover:text-[var(--red)] transition-colors">
                 Download PDF Spec
             </button>
-            <div class="mt-12 pt-8 border-t border-gray-800 mono text-[10px] flex justify-between text-gray-600">
-                <span>MASO.CORP © 2024</span>
+            <div class="mt-12 pt-8 border-t border-gray-800 mono text-[10px] flex justify-between text-gray-500">
+                <span>MASO.CORP © 2025</span>
                 <span>PRAGUE / CZECHIA</span>
             </div>
         </div>
@@ -251,23 +315,186 @@
         };
 
         const pages = [
-            { id: 1, section: "Brand", title: "MASO", subtitle: "Cover", desc: "Minimalist layout.", tech: "PANTONE" },
-            { id: 2, section: "Brand", title: "INTRO", subtitle: "Manifesto", desc: "Big typography.", tech: "TYPE" },
-            { id: 3, section: "Product", title: "INDEX", subtitle: "List", desc: "Table of contents.", tech: "DATA" },
-            { id: 4, section: "Product", title: "RIB-EYE", subtitle: "Steak", desc: "Duotone Photo.", tech: "IMG" },
-            { id: 5, section: "Product", title: "T-BONE", subtitle: "Bone", desc: "Macro detail.", tech: "IMG" },
-            { id: 6, section: "Data", title: "MAP", subtitle: "Logistic", desc: "Vector map.", tech: "VEC" },
-            { id: 7, section: "Data", title: "PRICE", subtitle: "Table", desc: "Pricing data.", tech: "DATA" },
-            { id: 8, section: "Tech", title: "ANATOMY", subtitle: "Cow", desc: "Diagram.", tech: "VEC" },
-            { id: 9, section: "Tech", title: "KNIVES", subtitle: "Tools", desc: "Silhouettes.", tech: "VEC" },
-            { id: 10, section: "Data", title: "ROI", subtitle: "Chart", desc: "Bar chart.", tech: "DATA" },
-            { id: 11, section: "Brand", title: "ISO", subtitle: "Cert", desc: "Pattern.", tech: "PAT" },
-            { id: 12, section: "Product", title: "AGED", subtitle: "Time", desc: "Timeline.", tech: "UI" },
-            { id: 13, section: "Product", title: "WAGYU", subtitle: "Premium", desc: "Inverted.", tech: "INV" },
-            { id: 14, section: "Brand", title: "CLIENTS", subtitle: "Grid", desc: "Logos.", tech: "GRID" },
-            { id: 15, section: "Contact", title: "FORM", subtitle: "Order", desc: "Dashed lines.", tech: "UI" },
-            { id: 16, section: "Contact", title: "BACK", subtitle: "End", desc: "QR Code.", tech: "QR" }
+            { id: 1, section: "Brand", title: "MASO", subtitle: "Cover", desc: "Minimalist layout. Big Logo.", tech: "PANTONE", layout: "cover" },
+            { id: 2, section: "Brand", title: "INTRO", subtitle: "Manifesto", desc: "Large typography only.", tech: "TYPE", layout: "typo" },
+            { id: 3, section: "Product", title: "INDEX", subtitle: "List", desc: "Table of contents.", tech: "DATA", layout: "list" },
+            { id: 4, section: "Product", title: "RIB-EYE", subtitle: "Steak", desc: "Full bleed Duotone Photo.", tech: "IMG", layout: "image-full" },
+            { id: 5, section: "Product", title: "T-BONE", subtitle: "Bone", desc: "Macro detail + Text.", tech: "IMG", layout: "image-text" },
+            { id: 6, section: "Data", title: "MAP", subtitle: "Logistic", desc: "Vector map visualization.", tech: "VEC", layout: "map" },
+            { id: 7, section: "Data", title: "PRICE", subtitle: "Table", desc: "Dense pricing data.", tech: "DATA", layout: "table" },
+            { id: 8, section: "Tech", title: "ANATOMY", subtitle: "Cow", desc: "Diagram outline.", tech: "VEC", layout: "diagram" },
+            { id: 9, section: "Tech", title: "KNIVES", subtitle: "Tools", desc: "Silhouettes.", tech: "VEC", layout: "tools" },
+            { id: 10, section: "Data", title: "ROI", subtitle: "Chart", desc: "Bar chart comparison.", tech: "DATA", layout: "chart" },
+            { id: 11, section: "Brand", title: "ISO", subtitle: "Cert", desc: "Repeating pattern.", tech: "PAT", layout: "pattern" },
+            { id: 12, section: "Product", title: "AGED", subtitle: "Time", desc: "Timeline visualization.", tech: "UI", layout: "timeline" },
+            { id: 13, section: "Product", title: "WAGYU", subtitle: "Premium", desc: "Inverted (Black page).", tech: "INV", layout: "inverted" },
+            { id: 14, section: "Brand", title: "CLIENTS", subtitle: "Grid", desc: "Logo grid.", tech: "GRID", layout: "grid-logos" },
+            { id: 15, section: "Contact", title: "FORM", subtitle: "Order", desc: "Dashed lines form.", tech: "UI", layout: "form" },
+            { id: 16, section: "Contact", title: "BACK", subtitle: "End", desc: "QR Code + Footer.", tech: "QR", layout: "back" }
         ];
+
+        // --- VISUALIZATION GENERATOR (Wireframes) ---
+        function getLayoutThumb(type) {
+            // Colors update automatically with CSS vars
+            const black = 'var(--black)';
+            const white = 'var(--white)';
+            const gray = 'var(--gray)';
+            const red = 'var(--red)';
+            
+            switch(type) {
+                case 'cover':
+                    return `
+                        <div class="h-full w-full flex flex-col justify-center items-center p-4">
+                            <div class="w-full text-center font-black text-2xl tracking-tighter" style="color:${black}">MASO</div>
+                            <div class="w-16 h-2 bg-[var(--red)] mt-2"></div>
+                            <div class="absolute bottom-4 text-[6px] font-mono" style="color:${black}">EST 2025</div>
+                        </div>
+                    `;
+                case 'typo':
+                    return `
+                        <div class="h-full w-full p-2 flex flex-col justify-center">
+                            <div class="w-full h-4 bg-[var(--black)] mb-1"></div>
+                            <div class="w-3/4 h-4 bg-[var(--black)] mb-1"></div>
+                            <div class="w-full h-4 bg-[var(--black)] mb-1"></div>
+                            <div class="w-1/2 h-4 bg-[var(--red)]"></div>
+                        </div>
+                    `;
+                case 'list':
+                    return `
+                        <div class="h-full w-full p-2 pt-4">
+                            <div class="w-1/3 h-2 bg-[var(--black)] mb-3"></div>
+                            <div class="flex gap-1 mb-1"><div class="w-4 h-1 bg-gray-300"></div><div class="w-full h-1 bg-gray-200"></div></div>
+                            <div class="flex gap-1 mb-1"><div class="w-4 h-1 bg-gray-300"></div><div class="w-full h-1 bg-gray-200"></div></div>
+                            <div class="flex gap-1 mb-1"><div class="w-4 h-1 bg-gray-300"></div><div class="w-full h-1 bg-gray-200"></div></div>
+                        </div>
+                    `;
+                case 'image-full':
+                    return `
+                        <div class="h-full w-full bg-gray-200 relative">
+                            <div class="absolute inset-0 bg-[var(--red)] opacity-20"></div>
+                            <div class="absolute bottom-2 left-2 text-[8px] font-mono font-bold text-black">IMG</div>
+                            <div class="absolute top-0 right-0 w-1/2 h-full border-l border-white opacity-20"></div>
+                        </div>
+                    `;
+                case 'image-text':
+                    return `
+                        <div class="h-full w-full flex flex-col">
+                            <div class="h-2/3 bg-gray-200 relative border-b border-[var(--black)]">
+                                <div class="absolute top-2 left-2 w-8 h-8 rounded-full border border-black"></div>
+                            </div>
+                            <div class="h-1/3 p-2">
+                                <div class="w-full h-1 bg-[var(--black)] mb-1"></div>
+                                <div class="w-2/3 h-1 bg-gray-400"></div>
+                            </div>
+                        </div>
+                    `;
+                case 'map':
+                    return `
+                        <div class="h-full w-full p-2 relative flex items-center justify-center">
+                            <div class="w-20 h-20 border border-[var(--black)] rounded-full flex items-center justify-center relative">
+                                <div class="absolute w-full h-[1px] bg-[var(--black)] rotate-45"></div>
+                                <div class="absolute w-full h-[1px] bg-[var(--black)] -rotate-45"></div>
+                                <div class="w-2 h-2 bg-[var(--red)] rounded-full absolute top-4 left-4"></div>
+                            </div>
+                        </div>
+                    `;
+                case 'table':
+                    return `
+                        <div class="h-full w-full p-2 pt-4">
+                            <div class="w-full h-full border-t border-l border-gray-300 grid grid-cols-3 grid-rows-5 text-[4px] font-mono text-center items-center">
+                                <div class="border-b border-r border-gray-300 h-full"></div><div class="border-b border-r border-gray-300 h-full"></div><div class="border-b border-r border-gray-300 h-full"></div>
+                                <div class="border-b border-r border-gray-300 h-full"></div><div class="border-b border-r border-gray-300 h-full bg-gray-100"></div><div class="border-b border-r border-gray-300 h-full"></div>
+                                <div class="border-b border-r border-gray-300 h-full"></div><div class="border-b border-r border-gray-300 h-full"></div><div class="border-b border-r border-gray-300 h-full"></div>
+                            </div>
+                        </div>
+                    `;
+                case 'diagram':
+                    return `
+                         <div class="h-full w-full p-2 flex items-center justify-center">
+                            <div class="w-24 h-12 border-2 border-[var(--black)] relative">
+                                <div class="absolute top-0 left-8 w-[1px] h-full bg-[var(--black)]"></div>
+                                <div class="absolute top-0 left-16 w-[1px] h-full bg-[var(--black)]"></div>
+                                <div class="absolute top-2 right-2 w-2 h-2 bg-[var(--red)] rounded-full"></div>
+                            </div>
+                         </div>
+                    `;
+                case 'tools':
+                    return `
+                        <div class="h-full w-full p-2 flex flex-col justify-around">
+                            <div class="w-full h-4 bg-[var(--black)] -rotate-2"></div>
+                            <div class="w-full h-2 bg-gray-300 rotate-1"></div>
+                            <div class="w-full h-4 bg-[var(--black)] rotate-2"></div>
+                        </div>
+                    `;
+                case 'chart':
+                    return `
+                        <div class="h-full w-full p-4 flex items-end gap-1">
+                            <div class="w-1/4 h-1/3 bg-gray-300"></div>
+                            <div class="w-1/4 h-1/2 bg-gray-400"></div>
+                            <div class="w-1/4 h-2/3 bg-[var(--black)]"></div>
+                            <div class="w-1/4 h-full bg-[var(--red)]"></div>
+                        </div>
+                    `;
+                case 'pattern':
+                    return `
+                        <div class="h-full w-full p-1 grid grid-cols-4 gap-1">
+                            <div class="w-full h-full border border-[var(--black)] rounded-full"></div>
+                            <div class="w-full h-full border border-[var(--black)] rounded-full"></div>
+                            <div class="w-full h-full border border-[var(--black)] rounded-full"></div>
+                            <div class="w-full h-full border border-[var(--red)] rounded-full"></div>
+                            <div class="w-full h-full border border-[var(--black)] rounded-full"></div>
+                        </div>
+                    `;
+                case 'timeline':
+                    return `
+                        <div class="h-full w-full p-4 flex items-center">
+                            <div class="w-full h-[2px] bg-[var(--black)] relative">
+                                <div class="w-2 h-2 bg-[var(--black)] rounded-full absolute -top-1 left-0"></div>
+                                <div class="w-2 h-2 bg-[var(--black)] rounded-full absolute -top-1 left-1/2"></div>
+                                <div class="w-2 h-2 bg-[var(--red)] rounded-full absolute -top-1 right-0"></div>
+                            </div>
+                        </div>
+                    `;
+                case 'inverted':
+                    return `
+                        <div class="h-full w-full bg-[var(--black)] p-4 flex flex-col justify-center text-[var(--white)]">
+                            <div class="font-black text-xl mb-2">WAGYU</div>
+                            <div class="w-full h-[1px] bg-[var(--red)] mb-2"></div>
+                            <div class="w-full h-1 bg-gray-600 mb-1"></div>
+                            <div class="w-2/3 h-1 bg-gray-600"></div>
+                        </div>
+                    `;
+                case 'grid-logos':
+                    return `
+                        <div class="h-full w-full p-2 grid grid-cols-3 grid-rows-4 gap-2">
+                             <div class="bg-gray-100"></div><div class="bg-gray-100"></div><div class="bg-gray-100"></div>
+                             <div class="bg-gray-100"></div><div class="bg-[var(--black)]"></div><div class="bg-gray-100"></div>
+                             <div class="bg-gray-100"></div><div class="bg-gray-100"></div><div class="bg-gray-100"></div>
+                        </div>
+                    `;
+                case 'form':
+                    return `
+                        <div class="h-full w-full p-4 flex flex-col gap-3">
+                            <div class="w-full border-b border-dashed border-[var(--black)] h-4"></div>
+                            <div class="w-full border-b border-dashed border-[var(--black)] h-4"></div>
+                            <div class="w-full border-b border-dashed border-[var(--black)] h-4"></div>
+                            <div class="w-24 h-6 border border-[var(--red)] mt-2"></div>
+                        </div>
+                    `;
+                case 'back':
+                    return `
+                        <div class="h-full w-full p-4 flex flex-col justify-end items-end">
+                            <div class="w-16 h-16 bg-[var(--black)] mb-2 p-1">
+                                <div class="w-full h-full bg-[var(--white)] flex items-center justify-center text-[4px]" style="color:var(--black)">QR</div>
+                            </div>
+                            <div class="w-full h-[1px] bg-[var(--black)]"></div>
+                            <div class="text-[6px] font-mono mt-1" style="color:var(--black)">MASO.CORP</div>
+                        </div>
+                    `;
+                default:
+                    return `<div class="bg-gray-100 w-full h-full"></div>`;
+            }
+        }
 
         // --- RENDERERS ---
 
@@ -310,23 +537,26 @@
 
             filtered.forEach(p => {
                 const card = document.createElement('div');
-                // Clean static card styling
-                card.className = "w-[240px] h-[320px] p-6 flex flex-col justify-between shrink-0 bg-white border border-gray-200 hover:border-black transition-colors duration-200";
+                card.className = "card-container w-[280px] h-[400px] p-5 flex flex-col justify-between shrink-0 border border-gray-200 hover:border-black transition-colors duration-200";
                 
+                // Get visualization
+                const thumbHTML = getLayoutThumb(p.layout);
+
                 card.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <span class="text-5xl font-black text-gray-200">${p.id.toString().padStart(2, '0')}</span>
-                        <div class="w-2 h-2 rounded-full ${p.section === 'Brand' ? 'bg-black' : 'bg-red-600'}"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-3xl font-black text-gray-300">${p.id.toString().padStart(2, '0')}</span>
+                        <div class="text-[10px] mono uppercase bg-gray-100 px-1 py-0.5 text-gray-600">${p.tech}</div>
+                    </div>
+                    
+                    <!-- Layout Visualization -->
+                    <div class="thumb-box mb-4 cursor-crosshair">
+                        ${thumbHTML}
                     </div>
                     
                     <div>
-                        <h3 class="text-2xl font-black uppercase leading-none mb-1">${p.title}</h3>
-                        <p class="mono text-xs text-gray-500 uppercase tracking-widest">${p.subtitle}</p>
-                    </div>
-                    
-                    <div class="pt-4 border-t border-gray-100">
-                        <p class="text-sm font-bold leading-tight mb-2 text-gray-800">${p.desc}</p>
-                        <span class="text-[10px] mono uppercase bg-gray-100 px-1 py-0.5 text-gray-600">${p.tech}</span>
+                        <h3 class="text-xl font-black uppercase leading-none mb-1">${p.title}</h3>
+                        <p class="mono text-[10px] text-gray-500 uppercase tracking-widest mb-2">${p.subtitle}</p>
+                        <p class="text-xs font-bold leading-tight text-gray-500 border-l-2 border-gray-200 pl-2">${p.desc}</p>
                     </div>
                 `;
                 track.appendChild(card);
@@ -341,10 +571,16 @@
             sections.forEach(sec => {
                 const btn = document.createElement('button');
                 btn.innerText = sec;
-                btn.className = "text-xs font-bold uppercase px-4 py-2 border border-gray-300 hover:border-black hover:bg-black hover:text-white transition-all bg-transparent font-mono";
+                btn.className = "text-xs font-bold uppercase px-4 py-2 border border-gray-300 hover:border-theme hover:bg-black hover:text-white transition-all bg-transparent font-mono btn-reset";
                 btn.onclick = () => renderFlatplan(sec);
                 container.appendChild(btn);
             });
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            // Re-render thumbnails so they pick up new colors (vars)
+            renderFlatplan(); 
         }
 
         // Init

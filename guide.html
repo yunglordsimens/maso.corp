@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASO.CORP // STATIC SYSTEM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;700;900&display=swap');
+
+        :root {
+            --black: #000;
+            --red: #ff2a00;
+            --white: #fff;
+            --gray: #f4f4f5;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white);
+            color: var(--black);
+            overflow-x: hidden;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* --- STATIC LAYOUT UTILS --- */
+        
+        /* Simple static header bar */
+        .status-bar {
+            background: var(--black);
+            color: var(--white);
+            padding: 0.75rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-bottom: 1px solid var(--black);
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1rem;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        /* Clean Buttons */
+        .btn-reset {
+            background: none;
+            border: 1px solid var(--black);
+            padding: 10px 24px;
+            text-transform: uppercase;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .btn-reset:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+        .btn-reset.active {
+            background: var(--red);
+            border-color: var(--red);
+            color: var(--white);
+        }
+
+        /* Minimal Cards */
+        .hover-card {
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .hover-card:hover {
+            background-color: var(--gray);
+        }
+
+        /* Typography Helper */
+        .text-stroke {
+            -webkit-text-stroke: 1px var(--red);
+            color: transparent;
+        }
+
+        /* Divider */
+        .divider-text {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            border-top: 1px solid var(--black);
+            border-bottom: 1px solid var(--black);
+            padding: 0.5rem 0;
+            background: var(--gray);
+            color: var(--black);
+        }
+        
+    </style>
+    <!-- Chosen Palette: Black, White, Red (#ff2a00). No animations. -->
+    <!-- Structure:
+         1. Static Status Bar (instead of marquee).
+         2. Clean Typography (No kinetic stretching).
+         3. Stable Grid Layout.
+         4. Simple Hover States (Color change only).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body>
+
+    <!-- STATIC STATUS BAR -->
+    <div class="status-bar px-4 flex justify-between items-center">
+        <div>MASO.CORP™ SYSTEM v2.0</div>
+        <div class="hidden md:block">STATUS: PRODUCTION READY</div>
+        <div>OFFSET PRINTING ONLY</div>
+    </div>
+
+    <!-- HERO -->
+    <header class="max-w-[1400px] mx-auto px-4 py-20">
+        <div class="grid-layout items-end">
+            <div class="col-span-12 lg:col-span-9">
+                <h1 class="text-[10vw] leading-[0.85] font-black tracking-tighter uppercase">
+                    MASO<br>
+                    <span class="text-[var(--red)]">SYSTEM</span>
+                </h1>
+            </div>
+            <div class="col-span-12 lg:col-span-3 lg:text-right mt-8 lg:mt-0">
+                <div class="w-full h-[1px] bg-black mb-4 block lg:hidden"></div>
+                <p class="mono text-xs leading-relaxed">
+                    PRODUCTION GUIDE<br>
+                    B1 FORMAT / 16 PAGES<br>
+                    2 COLOR OFFSET
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- INFO GRID -->
+    <section class="max-w-[1400px] mx-auto px-4 mb-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 border-t border-black">
+            <div class="hover-card p-6 border-b md:border-b-0 md:border-r border-black">
+                <span class="mono text-xs text-gray-500 block mb-3">01. CLIENT</span>
+                <h3 class="text-2xl font-bold uppercase leading-none">Premium<br>Supply</h3>
+            </div>
+            <div class="hover-card p-6 border-b md:border-b-0 md:border-r border-black">
+                <span class="mono text-xs text-gray-500 block mb-3">02. FORMAT</span>
+                <h3 class="text-2xl font-bold uppercase leading-none">B1 Sheet<br>(16 Pages)</h3>
+            </div>
+            <div class="hover-card p-6">
+                <span class="mono text-xs text-gray-500 block mb-3">03. COLOR</span>
+                <h3 class="text-2xl font-bold uppercase leading-none text-[var(--red)]">2/2 Offset<br>Duotone</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATIC DIVIDER -->
+    <div class="divider-text px-4">
+        <span>Raw Data</span> • <span>Blood & Ink</span> • <span>Overprint Ready</span> • <span>No Preservatives</span> • <span>Industrial Standard</span>
+    </div>
+
+    <main class="max-w-[1400px] mx-auto px-4 py-20 space-y-24">
+
+        <!-- SECTION 1: IMPOSITION -->
+        <section id="imposition-lab">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-black pb-4">
+                <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
+                    IMPOSITION
+                </h2>
+                <div class="flex gap-2 mt-4 md:mt-0 mb-2">
+                    <button onclick="setSide('A')" id="btn-side-a" class="btn-reset active">Side A</button>
+                    <button onclick="setSide('B')" id="btn-side-b" class="btn-reset">Side B</button>
+                </div>
+            </div>
+
+            <!-- The Visualizer -->
+            <div class="w-full aspect-[1.414/1] border border-black p-4 relative bg-gray-50">
+                <div class="absolute top-0 left-0 bg-black text-white px-2 py-1 mono text-[10px] uppercase">B1 Sheet Preview</div>
+                
+                <div id="imposition-grid" class="grid grid-cols-4 grid-rows-2 h-full gap-px bg-gray-200 border border-gray-300 mt-6">
+                    <!-- JS Injected -->
+                </div>
+            </div>
+            <div class="mt-4 flex justify-between mono text-xs text-gray-500">
+                <span>Scale 1:10</span>
+                <span>*Top row pages are rotated 180° for folding</span>
+            </div>
+        </section>
+
+        <!-- SECTION 2: FLATPLAN -->
+        <section>
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-black pb-4 gap-6">
+                <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
+                    FLATPLAN
+                </h2>
+                <div class="flex flex-wrap gap-2 mb-2" id="filter-container">
+                    <!-- Filters -->
+                </div>
+            </div>
+
+            <!-- Horizontal Scroll -->
+            <div class="overflow-x-auto pb-8 no-scrollbar" id="flatplan-container">
+                <div class="flex gap-4 w-max" id="flatplan-track">
+                    <!-- Cards via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: INK SPECS -->
+        <section class="grid grid-cols-1 md:grid-cols-2 border border-black">
+            <div class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-black hover:bg-gray-50 transition-colors">
+                <div class="w-8 h-8 bg-black rounded-full mb-6"></div>
+                <h3 class="text-3xl font-bold uppercase mb-4">Black Ink (K)</h3>
+                <p class="mono text-sm max-w-sm leading-relaxed text-gray-600">
+                    Standard Process Black. Used for body text, data tables, and structural lines. Ensure 100% K for crisp typography.
+                </p>
+            </div>
+            <div class="p-8 md:p-12 hover:bg-gray-50 transition-colors">
+                <div class="w-8 h-8 bg-[var(--red)] rounded-full mb-6 mix-blend-multiply"></div>
+                <h3 class="text-3xl font-bold uppercase mb-4 text-[var(--red)]">Pantone 805</h3>
+                <p class="mono text-sm max-w-sm leading-relaxed text-gray-600">
+                    Neon Red Spot Color. Used for highlights and "organic" shapes. Set blending mode to Multiply when overlapping black.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-white py-16 text-center">
+        <div class="max-w-[1400px] mx-auto px-4">
+            <p class="mono text-xs text-gray-500 mb-6 uppercase">Document Status: Final</p>
+            <button class="text-3xl md:text-5xl font-black uppercase hover:text-[var(--red)] transition-colors">
+                Download PDF Spec
+            </button>
+            <div class="mt-12 pt-8 border-t border-gray-800 mono text-[10px] flex justify-between text-gray-600">
+                <span>MASO.CORP © 2024</span>
+                <span>PRAGUE / CZECHIA</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA ---
+        const imposition = {
+            A: [8, 9, 12, 5, 1, 16, 13, 4],
+            B: [7, 10, 11, 6, 2, 15, 14, 3]
+        };
+
+        const pages = [
+            { id: 1, section: "Brand", title: "MASO", subtitle: "Cover", desc: "Minimalist layout.", tech: "PANTONE" },
+            { id: 2, section: "Brand", title: "INTRO", subtitle: "Manifesto", desc: "Big typography.", tech: "TYPE" },
+            { id: 3, section: "Product", title: "INDEX", subtitle: "List", desc: "Table of contents.", tech: "DATA" },
+            { id: 4, section: "Product", title: "RIB-EYE", subtitle: "Steak", desc: "Duotone Photo.", tech: "IMG" },
+            { id: 5, section: "Product", title: "T-BONE", subtitle: "Bone", desc: "Macro detail.", tech: "IMG" },
+            { id: 6, section: "Data", title: "MAP", subtitle: "Logistic", desc: "Vector map.", tech: "VEC" },
+            { id: 7, section: "Data", title: "PRICE", subtitle: "Table", desc: "Pricing data.", tech: "DATA" },
+            { id: 8, section: "Tech", title: "ANATOMY", subtitle: "Cow", desc: "Diagram.", tech: "VEC" },
+            { id: 9, section: "Tech", title: "KNIVES", subtitle: "Tools", desc: "Silhouettes.", tech: "VEC" },
+            { id: 10, section: "Data", title: "ROI", subtitle: "Chart", desc: "Bar chart.", tech: "DATA" },
+            { id: 11, section: "Brand", title: "ISO", subtitle: "Cert", desc: "Pattern.", tech: "PAT" },
+            { id: 12, section: "Product", title: "AGED", subtitle: "Time", desc: "Timeline.", tech: "UI" },
+            { id: 13, section: "Product", title: "WAGYU", subtitle: "Premium", desc: "Inverted.", tech: "INV" },
+            { id: 14, section: "Brand", title: "CLIENTS", subtitle: "Grid", desc: "Logos.", tech: "GRID" },
+            { id: 15, section: "Contact", title: "FORM", subtitle: "Order", desc: "Dashed lines.", tech: "UI" },
+            { id: 16, section: "Contact", title: "BACK", subtitle: "End", desc: "QR Code.", tech: "QR" }
+        ];
+
+        // --- RENDERERS ---
+
+        function renderImposition(side) {
+            const grid = document.getElementById('imposition-grid');
+            grid.innerHTML = '';
+            
+            // Buttons
+            document.getElementById('btn-side-a').className = side === 'A' ? 'btn-reset active' : 'btn-reset';
+            document.getElementById('btn-side-b').className = side === 'B' ? 'btn-reset active' : 'btn-reset';
+
+            const layout = imposition[side];
+            
+            layout.forEach((pid, idx) => {
+                const page = pages.find(p => p.id === pid);
+                const isRotated = idx < 4; 
+                
+                const cell = document.createElement('div');
+                cell.className = `bg-white p-2 flex flex-col justify-between relative border border-gray-100 group hover:border-black transition-colors duration-200`;
+                
+                const rotClass = isRotated ? 'rotate-180 text-red-600' : 'text-black';
+
+                cell.innerHTML = `
+                    <div class="text-[10px] mono text-gray-400 group-hover:text-black">${isRotated ? '180°' : '0°'}</div>
+                    <div class="${rotClass} text-center w-full">
+                        <span class="text-3xl font-black block leading-none">${pid.toString().padStart(2,'0')}</span>
+                        <span class="text-[9px] uppercase font-bold tracking-widest block w-full mt-1">${page.title}</span>
+                    </div>
+                    <div class="text-[9px] mono text-gray-300 absolute bottom-1 right-2 group-hover:text-red-600">${page.tech}</div>
+                `;
+                grid.appendChild(cell);
+            });
+        }
+
+        function renderFlatplan(filter = 'ALL') {
+            const track = document.getElementById('flatplan-track');
+            track.innerHTML = '';
+            
+            const filtered = filter === 'ALL' ? pages : pages.filter(p => p.section === filter);
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                // Clean static card styling
+                card.className = "w-[240px] h-[320px] p-6 flex flex-col justify-between shrink-0 bg-white border border-gray-200 hover:border-black transition-colors duration-200";
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <span class="text-5xl font-black text-gray-200">${p.id.toString().padStart(2, '0')}</span>
+                        <div class="w-2 h-2 rounded-full ${p.section === 'Brand' ? 'bg-black' : 'bg-red-600'}"></div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-black uppercase leading-none mb-1">${p.title}</h3>
+                        <p class="mono text-xs text-gray-500 uppercase tracking-widest">${p.subtitle}</p>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-gray-100">
+                        <p class="text-sm font-bold leading-tight mb-2 text-gray-800">${p.desc}</p>
+                        <span class="text-[10px] mono uppercase bg-gray-100 px-1 py-0.5 text-gray-600">${p.tech}</span>
+                    </div>
+                `;
+                track.appendChild(card);
+            });
+        }
+
+        function renderFilters() {
+            const sections = ['ALL', ...new Set(pages.map(p => p.section))];
+            const container = document.getElementById('filter-container');
+            container.innerHTML = '';
+
+            sections.forEach(sec => {
+                const btn = document.createElement('button');
+                btn.innerText = sec;
+                btn.className = "text-xs font-bold uppercase px-4 py-2 border border-gray-300 hover:border-black hover:bg-black hover:text-white transition-all bg-transparent font-mono";
+                btn.onclick = () => renderFlatplan(sec);
+                container.appendChild(btn);
+            });
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            renderImposition('A');
+            renderFilters();
+            renderFlatplan();
+        });
+        
+        window.setSide = renderImposition;
+
+    </script>
+</body>
+</html>

@@ -82,10 +82,10 @@
             color: var(--white);
         }
 
-        /* Download Button Style */
-        .btn-download {
-            border: 1px dashed var(--black);
-            padding: 8px 16px;
+        /* Download Button Style (Small Top) */
+        .btn-download-small {
+            border-bottom: 1px solid var(--black);
+            padding-bottom: 2px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.7rem;
             text-transform: uppercase;
@@ -94,10 +94,9 @@
             gap: 8px;
             transition: all 0.2s;
         }
-        .btn-download:hover {
-            background: var(--black);
-            color: var(--white);
-            border-style: solid;
+        .btn-download-small:hover {
+            color: var(--red);
+            border-color: var(--red);
         }
 
         /* Minimal Cards */
@@ -141,6 +140,8 @@
         .card-container {
             background-color: var(--white);
             border-color: var(--border-color);
+            /* Увеличим высоту карточки, чтобы вместить вертикальный эскиз */
+            height: 520px !important; 
         }
         body.dark-theme .card-container {
             border-color: #333;
@@ -153,7 +154,8 @@
             background: var(--white);
             border: 1px solid var(--border-color);
             width: 100%;
-            height: 160px;
+            /* ИЗМЕНЕНИЕ: Высота теперь вертикальная (пропорции листа) */
+            height: 320px; 
             position: relative;
             overflow: hidden;
             display: flex;
@@ -190,9 +192,9 @@
     <div class="status-bar px-4 flex justify-between items-center">
         <div class="flex items-center">
             <!-- Ссылка на основной сайт -->
-            <a href="Maso_Corp_Landing.html" class="hover:text-[var(--red)] transition-colors mr-4 border-r border-[var(--white)] pr-4">← MASO.CORP SITE</a>
+            <a href="index.html" class="hover:text-[var(--red)] transition-colors mr-4 border-r border-[var(--white)] pr-4">← MASO.CORP SITE</a>
             
-            <span>MASO.CORP™ SYSTEM v2.0</span>
+            <span>MASO.CORP™ SYSTEM</span>
             
             <!-- Инверсия цветов -->
             <button onclick="toggleTheme()" class="theme-toggle">
@@ -204,10 +206,10 @@
         <div class="flex items-center gap-6">
             <div class="hidden md:block">STATUS: PRODUCTION READY</div>
             
-            <!-- Ссылки на скачивание (заглушки) -->
-            <div class="flex gap-2">
-                <a href="#" class="hover:underline hover:text-[var(--red)] text-[10px]">↓ CATALOG.PDF</a>
-                <a href="#" class="hover:underline hover:text-[var(--red)] text-[10px]">↓ CUTS_SCHEME.DXF</a>
+            <!-- Ссылки ведут на несуществующие файлы для эффекта 404 -->
+            <div class="flex gap-4">
+                <a href="assets/files/CATALOG_2026_FINAL.pdf" target="_blank" class="btn-download-small">↓ CATALOG.PDF</a>
+                <a href="assets/files/CUTS_SCHEME_V3.dxf" target="_blank" class="btn-download-small">↓ CUTS_SCHEME.DXF</a>
             </div>
         </div>
     </div>
@@ -228,8 +230,8 @@
                     B1 FORMAT / 16 PAGES<br>
                     2 COLOR OFFSET
                 </p>
-                <!-- ССЫЛКА НА ПОРТФОЛИО (Потом вставишь сюда реальный URL) -->
-                <a href="#" class="mt-4 inline-block btn-download">
+                <!-- ССЫЛКА НА ПОРТФОЛИО -->
+                <a href="#" class="mt-4 inline-block font-bold hover:text-[var(--red)] border-b border-transparent hover:border-[var(--red)] transition-all">
                     > VIEW FULL CASE STUDY
                 </a>
             </div>
@@ -327,17 +329,17 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-[var(--black)] text-[var(--white)] py-16 text-center transition-colors duration-300">
+    <footer class="bg-[var(--black)] text-[var(--white)] py-24 text-center transition-colors duration-300">
         <div class="max-w-[1400px] mx-auto px-4">
-            <p class="mono text-xs text-gray-500 mb-6 uppercase">Document Status: Final</p>
-            <div class="flex justify-center gap-4 my-6">
-                <!-- Еще раз дублируем кнопки скачивания для удобства -->
-                <a href="#" class="btn-download bg-[var(--white)] text-[var(--black)] hover:bg-[var(--gray)]">
-                    ↓ DOWNLOAD PDF
-                </a>
-            </div>
-            <div class="mt-12 pt-8 border-t border-gray-800 mono text-[10px] flex justify-between text-gray-500">
-                <span>MASO.CORP © 2025</span>
+            <p class="mono text-sm text-gray-500 mb-8 uppercase">Document Status: Production Ready</p>
+            
+            <!-- HUGE DOWNLOAD BUTTON (REVERTED) -->
+            <a href="assets/files/CATALOG_2026_FINAL.pdf" target="_blank" class="text-4xl md:text-6xl font-black uppercase underline decoration-[var(--red)] hover:text-[var(--red)] transition-all">
+                DOWNLOAD PDF
+            </a>
+            
+            <div class="mt-16 pt-8 border-t border-gray-800 mono text-[10px] flex justify-between text-gray-500">
+                <span>MASO.CORP © 2026</span>
                 <span>PRAGUE / CZECHIA</span>
             </div>
         </div>
@@ -352,7 +354,7 @@
 
         const pages = [
             { id: 1, section: "Brand", title: "MASO", subtitle: "Cover", desc: "Minimalist layout. Big Logo.", tech: "PANTONE", layout: "cover" },
-            { id: 2, section: "Brand", title: "INTRO", subtitle: "Manifesto", desc: "Big typography.", tech: "TYPE", layout: "typo" },
+            { id: 2, section: "Brand", title: "INTRO", subtitle: "Manifesto", desc: "Large typography only.", tech: "TYPE", layout: "typo" },
             { id: 3, section: "Product", title: "INDEX", subtitle: "List", desc: "Table of contents.", tech: "DATA", layout: "list" },
             { id: 4, section: "Product", title: "RIB-EYE", subtitle: "Steak", desc: "Full bleed Duotone Photo.", tech: "IMG", layout: "image-full" },
             { id: 5, section: "Product", title: "T-BONE", subtitle: "Bone", desc: "Macro detail + Text.", tech: "IMG", layout: "image-text" },
@@ -363,7 +365,7 @@
             { id: 10, section: "Data", title: "ROI", subtitle: "Chart", desc: "Bar chart comparison.", tech: "DATA", layout: "chart" },
             { id: 11, section: "Brand", title: "ISO", subtitle: "Cert", desc: "Repeating pattern.", tech: "PAT", layout: "pattern" },
             { id: 12, section: "Product", title: "AGED", subtitle: "Time", desc: "Timeline visualization.", tech: "UI", layout: "timeline" },
-            { id: 13, section: "Product", title: "WAGYU", subtitle: "Premium", desc: "Inverted.", tech: "INV", layout: "inverted" },
+            { id: 13, section: "Product", title: "WAGYU", subtitle: "Premium", desc: "Inverted (Black page).", tech: "INV", layout: "inverted" },
             { id: 14, section: "Brand", title: "CLIENTS", subtitle: "Grid", desc: "Logo grid.", tech: "GRID", layout: "grid-logos" },
             { id: 15, section: "Contact", title: "FORM", subtitle: "Order", desc: "Dashed lines form.", tech: "UI", layout: "form" },
             { id: 16, section: "Contact", title: "BACK", subtitle: "End", desc: "QR Code + Footer.", tech: "QR", layout: "back" }
@@ -573,7 +575,7 @@
 
             filtered.forEach(p => {
                 const card = document.createElement('div');
-                card.className = "card-container w-[280px] h-[400px] p-5 flex flex-col justify-between shrink-0 border border-gray-200 hover:border-black transition-colors duration-200";
+                card.className = "card-container w-[280px] p-5 flex flex-col justify-between shrink-0 border border-gray-200 hover:border-black transition-colors duration-200";
                 
                 // Get visualization
                 const thumbHTML = getLayoutThumb(p.layout);

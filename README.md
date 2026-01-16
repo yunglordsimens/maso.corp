@@ -1,6 +1,8 @@
 # MASO.CORP // INDUSTRIAL SUPPLY
 
-A speculative design project exploring the aesthetics of corporate brutalism applied to a fictional high-tech meat processing conglomerate. This is a frontend prototype simulating a strict B2B ordering system and digital identity.
+A speculative design project exploring the aesthetics of corporate brutalism applied to a fictional high-tech meat processing conglomerate.
+
+Beyond the visual facade, this project features a **fully functional Print Production Tool** (Offset Imposition & Flatplan Renderer), demonstrating the fusion of graphic design rules with frontend logic.
 
 🔗 **[View Live Terminal](https://yunglordsimens.github.io/maso.corp/)**
 
@@ -18,10 +20,10 @@ A speculative design project exploring the aesthetics of corporate brutalism app
 
 The project imagines a near-future interface for **MASO.CORP**, a ubiquitous meat supply monopoly. The design language rejects consumer-friendly warmth in favor of "Anti-Design" and "Raw Industrialism."
 
-**Visual Pillars:**
+**Visual & Technical Pillars:**
 * **Aesthetic:** Corporate Brutalism. High contrast, monospace typography (`JetBrains Mono`), and raw layout grids.
+* **Design Engineering:** The system includes a hidden **"Technical Guide" module** — a custom-coded tool that automatically renders print impositions and flatplans using `Chart.js`, simulating real-world offset printing workflows.
 * **Atmosphere:** Dystopian B2B. Interface elements simulate system logs, stock tickers, and unauthorized access warnings.
-* **Palette:** `Signal Red` (#ff2a00) on `Deep Black` (#050505) — conveying urgency and biological matter.
 
 ---
 

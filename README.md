@@ -2,7 +2,7 @@
 
 A speculative design project exploring the aesthetics of corporate brutalism applied to a fictional high-tech meat processing conglomerate. This is a frontend prototype simulating a strict B2B ordering system and digital identity.
 
-**[View Live Terminal](https://yunglordsimens.github.io/maso.corp/)**
+🔗 **[View Live Terminal](https://yunglordsimens.github.io/maso.corp/)**
 
 ---
 

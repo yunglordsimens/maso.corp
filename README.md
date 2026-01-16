@@ -62,7 +62,7 @@ Built as a lightweight, performance-focused static site using utility-first prin
 | **Vanilla JS** | Logic for interactive cursors, image reveals, and style toggles. |
 | **Chart.js** | Data visualization for the technical guide dashboard. |
 
-## / CREDITS
+### / CREDITS
 
 **Maria Chernobay** — Art Direction & Frontend Development.
 *Concept Work, 2025.*

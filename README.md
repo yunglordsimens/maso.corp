@@ -65,4 +65,4 @@ Built as a lightweight, performance-focused static site using utility-first prin
 ## / CREDITS
 
 **Maria Chernobay** — Art Direction & Frontend Development.
-*Concept Work, 2024.*
+*Concept Work, 2025.*

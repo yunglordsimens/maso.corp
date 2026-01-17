@@ -41,7 +41,7 @@ The prototype consists of several interconnected system nodes:
     <td width="50%" valign="top">
       <h4 align="center">ERROR HANDLING (404)</h4>
       <p align="center" style="font-size: 11px; font-family: monospace;">CRT Scanline effects & Noise overlays.</p>
-      <img src="./preview_404.png" width="100%" style="border: 1px solid #ccc;">
+      <img src="./preview_404.gif" width="100%" style="border: 1px solid #ccc;">
     </td>
   </tr>
   <tr>

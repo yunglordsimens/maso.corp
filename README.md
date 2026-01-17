@@ -12,7 +12,7 @@ Beyond the visual facade, this project features a **fully functional Print Produ
 
 > **System Access & Dashboard.** Simulating a restricted B2B environment with IP logging and strict validation.
 <br>
-<img src="./preview_login_main.gif" width="100%" alt="System Interaction" style="border-radius: 4px; border: 1px solid #333;">
+<img src="./preview_login_main_guide.gif" width="100%" alt="System Interaction" style="border-radius: 4px; border: 1px solid #333;">
 
 ---
 

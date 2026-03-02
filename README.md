@@ -5,6 +5,7 @@ A speculative design project exploring the aesthetics of corporate brutalism app
 Beyond the visual facade, this project features a **fully functional Print Production Tool** (Offset Imposition & Flatplan Renderer), demonstrating the fusion of graphic design rules with frontend logic.
 
 🔗 **[View Live Terminal](https://yunglordsimens.github.io/maso.corp/)**
+🔗 **[Print Production Tool direct link] (https://yunglordsimens.github.io/maso.corp/guide.html)**
 
 ---
 
